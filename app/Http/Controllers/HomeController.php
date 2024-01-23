@@ -50,7 +50,9 @@ class HomeController extends Controller
         foreach ($array as $key => $value) {
             $standard_key_array[$key] = $value['post']['created_at'];
         }
-        array_multisort($standard_key_array, SORT_DESC, $array);
+        if(is_array($array)){
+            array_multisort($standard_key_array, SORT_DESC, $array);
+        }
 
         return $array;
     }
