@@ -41,12 +41,12 @@ class PostController extends Controller
         $loginUser = Session::get('user');
 
         $rules =[
-            'postContent' =>'required|max140'
+            'postContent' =>'required|max:140'
         ];
 
-        $massages = ['reqired' => '投稿内容が未入力です。','max' =>'入力可能文字数は140以内です。'];
+        $massages = ['required' => '投稿内容が未入力です。','max' =>'入力可能文字数は140以内です。'];
 
-        Validator::make($request->all(),$rules,$masseages)->validate();
+        Validator::make($request->all(), $rules, $massages)->validate();
 
         // データ登録
         $post = new Post;
