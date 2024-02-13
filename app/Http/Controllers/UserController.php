@@ -123,6 +123,26 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //TODO 登録処理
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email:filter|unique:users',
+            'password' => 'required|alpha_dash|min:8',
+        ];
+        $messages = ['required' => '入力内容が未入力です。', 'email' => '入力可能文字は半角英数、記号のみです。', 'alpha_dash' => '入力可能文字は半角英数、記号のみです。', 'min' => '8文字以上入力してください。,', 'unique' => 'このメールアドレスは既に使われています。,'];
+
+        Validator::make($request->all(), $rules, $messages)->validate();
+
+        $user = new User;
+        
+        $user->name = $request->input('name');
+
+        $user->email = $request->input('email');
+
+        $user->password = $request->input('password');
+
+        $user->save();
+
+        Session::put('user', $user);
 
         return redirect('/');
     }
