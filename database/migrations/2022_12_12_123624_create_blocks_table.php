@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('blocks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user');
-            $table->unsignedBigInteger('follow_user');
+            $table->unsignedBigInteger('block_user');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follow');
+        Schema::dropIfExists('block');
     }
 };

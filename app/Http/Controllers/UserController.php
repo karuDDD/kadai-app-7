@@ -108,6 +108,28 @@ class UserController extends Controller
         return redirect('/user/' . $user->id);
     }
 
+    /**
+     * ブロック画面遷移
+     */
+    public function block($id)
+    {
+        $user = User::find($id);
+
+
+
+
+
+        // ブロック済みかどうか判定
+        $isBlocked = false;
+        if (!$isOwnPage) {
+            $isBlocked = $loginUser->isBlocked($user->id);
+        }
+
+        
+    }
+
+   
+
 
     /**
      * 新規登録画面遷移
