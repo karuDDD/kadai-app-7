@@ -37,6 +37,18 @@
                                     </button> @endif
                             </form>
                         </div>
+                        <div class="block-info">
+                        <form name="block" action="/block/{{ $user->id }}" method="post">
+                                @csrf @method('PUT') @if ($isBlocked)
+                                <input type="hidden" name="isBlock" value="0" />
+                                <button class="button-white" onClick="unblock()">
+                                        ブロック済み
+                                    </button> @else
+                                    <input type="hidden" name="isBlock" value="1" />
+                                <button class="button-black">
+                                        ブロック
+                                    </button> @endif
+                            </form>
                         @endif
                     </div>
                     <div class="user-name">{{ $user->name }}</div>
@@ -56,6 +68,14 @@
                         </div>
                     </a>
                 </div>
+                <div class="block-info">
+                    <a href="/user/{{ $user->id }}/block">
+                        <div class="block">
+                            {{ $blockCount }} ブロック中
+                        </div>
+                   </a>
+               </div>
+                
             </div>
             <div class="post-list">
                 <div class="title">投稿一覧</div>
@@ -85,6 +105,13 @@
     function unfollow() {
         if (confirm("フォローを解除しますか?")) {
             document.follow.submit();
+        }
+    }
+</script>
+<script>
+    function unblock() {
+        if (confirm("ブロックを解除しますか?")) {
+            document.block.submit();
         }
     }
 </script>
