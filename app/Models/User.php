@@ -83,4 +83,35 @@ class User extends Model
             ->first()
             ->delete();
     }
+
+ /**
+     * ユーザーがブロックしているユーザーのリストを取得する
+     */
+    public function blockUsers()
+    {
+        $blockUsers = Follow::where('user', $this->id)->get();
+        $result = [];
+        foreach ($blockUsers as $blockUser) {
+            array_push($result, $blockUser->blockUser());
+        }
+        return $result;
+
+
+
+
+    /**
+     * $idのユーザーがこのユーザーをブロックしているか判定する
+     */
+
+     public function isBlocked($id)
+     {
+         foreach ($this->BlockUsers() as $BlockUser) {
+             if ($blockUser->id == $id) {
+                 return true;
+             }
+         }
+     }
+ 
+
+
 }
