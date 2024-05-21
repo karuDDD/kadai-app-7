@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\BlockController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,6 +80,8 @@ Route::get('user/{id}/follower', [FollowController::class, 'index']);
 /** フォロワー/フォロー解除処理 */
 Route::put('follow/{id}',[FollowController::class, 'update']);
 
+/** ブロック解除処理 */
+Route::put('block/{id}',[BlockController::class,'block']);
 /*-------------------------------------------------------------------------
 | 新規登録
 | -------------------------------------------------------------------------

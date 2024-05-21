@@ -41,7 +41,7 @@ class BlockController extends Controller
 
         // ブロック済みかどうか判定
         $isBlocked = false;
-        if (!$isOwnPage) {
+        if (isset($isOwnPage)) {
             $isBlocked = $loginUser->isBlocked($user->id);
         }
 

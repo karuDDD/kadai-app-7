@@ -47,7 +47,7 @@
                                     </button>  @else
                                     <input type="hidden" name="isBlock" value="1" />
                                 <button class="button-black">
-                                        ブロック
+                                        ブロック済み
                                     </button> @endif
                             </form>
                         @endif
@@ -146,6 +146,7 @@
     .user-page .follow-info .follow {
         margin-right: 5px;
     }
+ 
     
     .user-page .title {
         font-size: 18px;

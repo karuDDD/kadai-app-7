@@ -62,6 +62,20 @@ class User extends Model
         return false;
     }
 
+     /**
+     * $idのユーザーがこのユーザーをブロックしているか判定する
+     */
+    public function isBlocked($id)
+    {
+        foreach ($this->followUsers() as $blockUser) {
+            if ($blockUser->id == $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * $idのユーザーをフォローする
      */
@@ -84,34 +98,27 @@ class User extends Model
             ->delete();
     }
 
- /**
-     * ユーザーがブロックしているユーザーのリストを取得する
+       /**
+     * $idのユーザーをブロックする
      */
-    public function blockUsers()
+    public function block($id)
     {
-        $blockUsers = Follow::where('user', $this->id)->get();
-        $result = [];
-        foreach ($blockUsers as $blockUser) {
-            array_push($result, $blockUser->blockUser());
-        }
-        return $result;
+        $block = new Block;
+        $block->user = $this->id;
+        $block->block_user = $id;
+        $block->save();
+    }
 
-
-
-
-    /**
-     * $idのユーザーがこのユーザーをブロックしているか判定する
+        /**
+     * $idのユーザーをブロック解除する
      */
-
-     public function isBlocked($id)
-     {
-         foreach ($this->BlockUsers() as $BlockUser) {
-             if ($blockUser->id == $id) {
-                 return true;
-             }
-         }
-     }
- 
+    public function unblock($id)
+    {
+        Block::where('blocks', $this->id)
+            ->where('block_user', $id)
+            ->first()
+            ->delete();
+    }
 
 
-}
+ }
