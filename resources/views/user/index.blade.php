@@ -47,7 +47,7 @@
                                     </button>  @else
                                     <input type="hidden" name="isBlock" value="1" />
                                 <button class="button-black">
-                                        ブロック済み
+                                        ブロック
                                     </button> @endif
                             </form>
                         @endif

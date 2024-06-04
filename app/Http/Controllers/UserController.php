@@ -44,9 +44,9 @@ class UserController extends Controller
         $isBlocked = false;
         if (!$isOwnPage) {
             $isFollowed = $loginUser->isFollowed($user->id);
-            $Blocked = $loginUser->isBlocked($user->id);
+            $isBlocked = $loginUser->isBlocked($user->id);
         }
-        
+
 
         // 画面表示
         return view('user.index', compact('user', 'posts', 'followCount', 'followerCount', 'isOwnPage', 'isFollowed','isBlocked'));

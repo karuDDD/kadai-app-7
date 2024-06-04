@@ -81,7 +81,7 @@ Route::get('user/{id}/follower', [FollowController::class, 'index']);
 Route::put('follow/{id}',[FollowController::class, 'update']);
 
 /** ブロック解除処理 */
-Route::put('block/{id}',[BlockController::class,'block']);
+Route::put('block/{id}',[BlockController::class,'update']);
 /*-------------------------------------------------------------------------
 | 新規登録
 | -------------------------------------------------------------------------

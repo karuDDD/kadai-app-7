@@ -23,7 +23,7 @@ class Block extends Model
      */
     public function blocked()
     {
-        $blockUsers = Follow::where('block', $this->id)->get();
+        $blockUsers = Block::where('block', $this->id)->get();
         $result = [];
         foreach ($blockUsers as $blockUser) {
             array_push($result, $blockUser->blockUser());

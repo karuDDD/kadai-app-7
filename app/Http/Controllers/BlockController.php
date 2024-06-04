@@ -13,7 +13,7 @@ class BlockController extends Controller
      * ブロック画面処理
      * 
      */
-    public function block(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // idからユーザーを取得
         $user = User::find($id);
@@ -25,11 +25,10 @@ class BlockController extends Controller
 
         // セッションにログイン情報があるか確認
         if (!Session::exists('user')) {
-            return redirect('/');
+            return redirect('/user/');
         }
         // ログイン中のユーザーの情報を取得する
           $loginUser = Session::get('user');
-
 
           if ($request->isBlock) {
             // ブロック処理
@@ -37,12 +36,6 @@ class BlockController extends Controller
         } else {
             // ブロック解除処理
             $loginUser->unblock($id);
-        }
-
-        // ブロック済みかどうか判定
-        $isBlocked = false;
-        if (isset($isOwnPage)) {
-            $isBlocked = $loginUser->isBlocked($user->id);
         }
 
         // 画面表示
