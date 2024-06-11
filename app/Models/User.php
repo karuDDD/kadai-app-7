@@ -29,19 +29,11 @@ class User extends Model
     {
         $followUsers = Follow::where('user', $this->id)->get();
         $result = [];
-        foreach ($followUsers as $followUser) {
+        foreach ($followUsers as $followUsers) {
             array_push($result, $followUser->followUser());
         }
         return $result;
     }
-
-      /**
-     * ユーザーがブロックしているユーザーのリストを所得する
-     */
-    public function blockUser()
-    {
-        return User::find($this->block_user);
-    }  
 
      
     /**
@@ -53,19 +45,6 @@ class User extends Model
         $result = [];
         foreach ($followerUsers as $followUser) {
             array_push($result, $followUser->followerUser());
-        }
-        return $result;
-    }
-
-    /**
-     * ユーザーをブロックしているユーザーのリストを取得する
-     */
-    public function blockUsers()
-    {
-        $blockUsers = Block::where('block', $this->id)->get();
-        $result = [];
-        foreach ($blockUsers as $blockUser) {
-            array_push($result, $blockUser->blockUsers());
         }
         return $result;
     }
@@ -84,10 +63,6 @@ class User extends Model
 
         return false;
     }
-
-   
-
-
 
      /**
      * $idのユーザーがこのユーザーをブロックしているか判定する

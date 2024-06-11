@@ -9,27 +9,35 @@ class Block extends Model
 {
     use HasFactory;
 
+    
        /**
-     * ブロックしている側のユーザーを取得する
+     * ユーザーがブロックしている側のユーザーのリストを取得する
      */
-    public function blockUsers()
+    public function blockUser()
     {
-        return User::find($this->block_user);
+      $blockUser =Block::where('user',$this->id)->get();
+      $result = [];
+      foreach($blockUsers as $blockUser){
+        array_push($result,$blockUers->blockUser());
+      }
+      return $result;
     }   
 
 
      /**
-     * ユーザーがブロックしているユーザーのリストを取得する
+     * ユーザーをブロックしているユーザーのリストを取得する
      */
-    public function blocked()
+    public function blockUsers()
     {
-        $blockUsers = Block::where('block', $this->id)->get();
+        $blockUsers = Block::where('block_user', $this->id)->get();
         $result = [];
         foreach ($blockUsers as $blockUser) {
-            array_push($result, $blockUser->blockUser());
+            array_push($result, $blockUser->blockUsers());
         }
         return $result;
     }
+
+
 
 
 
