@@ -18,9 +18,7 @@ class BlockController extends Controller
         // idからユーザーを取得
         $user = User::find($id);
 
-        // ブロックしている側とブロックされている側の取得
-        $blockUser = $user->blockUser();
-        $blockUsers = $user->blockUsers();
+     
 
         // ユーザーが存在するか判定
           if ($user == null) {

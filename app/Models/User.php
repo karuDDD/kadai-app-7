@@ -30,7 +30,7 @@ class User extends Model
         $followUsers = Follow::where('user', $this->id)->get();
         $result = [];
         foreach ($followUsers as $followUsers) {
-            array_push($result, $followUser->followUser());
+            array_push($result, $followUsers->followUser());
         }
         return $result;
     }
@@ -43,8 +43,8 @@ class User extends Model
     {
         $followerUsers = Follow::where('follow_user', $this->id)->get();
         $result = [];
-        foreach ($followerUsers as $followUser) {
-            array_push($result, $followUser->followerUser());
+        foreach ($followerUsers as $followUsers) {
+            array_push($result, $followUsers->followerUser());
         }
         return $result;
     }
@@ -56,7 +56,7 @@ class User extends Model
     public function isFollowed($id)
     {
         foreach ($this->followUsers() as $followUser) {
-            if ($followUser->id == $id) {
+            if ($followUsers->id == $id) {
                 return true;
             }
         }
