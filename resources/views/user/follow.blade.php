@@ -25,14 +25,14 @@
             </div>
         </div>
         <div id="follow-list" class="folllow-list user-list">
-            @foreach ($followUsers as $followUser)
-            <a href="/user/{{ $followUser->id }}">
+            @foreach ($followUsers as $followUsers)
+            <a href="/user/{{ $followUsers->id }}">
                 <div class="user-list-item">
                     <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
                     <div class="info">
-                        <div class="user-name">{{ $followUser->name }}</div>
+                        <div class="user-name">{{ $followUsers->name }}</div>
                         <div class="biography">
-                            {{ $followUser->biography }}
+                            {{ $followUsers->biography }}
                         </div>
                     </div>
                 </div>
@@ -40,16 +40,16 @@
             @endforeach
         </div>
         <div id="follower-list" class="folllower-list user-list">
-            @foreach ($followerUsers as $followerUser)
-            <a href="/user/{{ $followerUser->id }}">
+            @foreach ($followerUsers as $followerUsers)
+            <a href="/user/{{ $followerUsers->id }}">
                 <div class="user-list-item">
                     <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
                     <div class="info">
                         <div class="user-name">
-                            {{ $followerUser->name }}
+                            {{ $followerUsers->name }}
                         </div>
                         <div class="biography">
-                            {{ $followerUser->biography }}
+                            {{ $followerUsers->biography }}
                         </div>
                     </div>
                 </div>

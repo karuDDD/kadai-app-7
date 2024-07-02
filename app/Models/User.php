@@ -30,7 +30,7 @@ class User extends Model
         $followUsers = Follow::where('user', $this->id)->get();
         $result = [];
         foreach ($followUsers as $followUsers) {
-            array_push($result, $followUsers->followUser());
+            array_push($result, $followUsers->followUsers());
         }
         return $result;
     }
@@ -44,7 +44,7 @@ class User extends Model
         $followerUsers = Follow::where('follow_user', $this->id)->get();
         $result = [];
         foreach ($followerUsers as $followUsers) {
-            array_push($result, $followUsers->followerUser());
+            array_push($result, $followUsers->followerUsers());
         }
         return $result;
     }
@@ -55,7 +55,7 @@ class User extends Model
      */
     public function isFollowed($id)
     {
-        foreach ($this->followUsers() as $followUser) {
+        foreach ($this->followUsers() as $followUsers) {
             if ($followUsers->id == $id) {
                 return true;
             }
@@ -122,5 +122,12 @@ class User extends Model
             ->delete();
     }
 
+      /**
+     * ユーザーがブロックしている側のユーザーのリストを取得する
+     */
+    public function blockUsers()
+    {
+        return Block::where('block_user',$this->id)->get();
 
- }
+    }
+}

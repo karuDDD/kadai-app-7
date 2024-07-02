@@ -13,7 +13,7 @@ class Follow extends Model
     /**
      * フォローしている側のユーザーを取得する
      */
-    public function followUser()
+    public function followUsers()
     {
         
         return User::find($this->follow_user);
