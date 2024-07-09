@@ -17,9 +17,6 @@ class BlockController extends Controller
     {
         // idからユーザーを取得
         $user = User::find($id);
-
-     
-
         // ユーザーが存在するか判定
           if ($user == null) {
             return dd('存在しないユーザーです');
