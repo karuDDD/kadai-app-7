@@ -39,16 +39,18 @@
                         </div>
                         <div class="block-info">
                         <form name="block" action="/block/{{ $user->id }}" method="post">
-                                @csrf @method('PUT') @if ($isBlocked)
-                                
-                                <input type="hidden" name="isBlock" value="0" />
+                                @csrf @method('PUT') 
+                                @if ($isBlocked)
+                                <input type="hidden" id="isBlocked" name="isBlock" value="0" />
                                 <button class="button-white" onClick="unblock()">
                                         ブロック解除
-                                    </button>  @else
-                                    <input type="hidden" name="isBlock" value="1" />
+                                </button>  
+                                @else
+                                <input type="hidden"id="isBlocked" name="isBlock" value="1" />
                                 <button class="button-black">
-                                        ブロック済
-                                    </button> @endif
+                                        ブロック
+                                </button> 
+                                @endif
                             </form>
                         @endif
                     </div>
@@ -73,6 +75,7 @@
             <div class="post-list">
                 <div class="title">投稿一覧</div>
                 @foreach ($posts as $post)
+                <input type="hidden" id="posts"  name="post" value="0" />
                 <a href="/post/detail/{{ $post->id }}">
                     <div class="post">
                         <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
@@ -95,13 +98,15 @@
 </body>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
+    console.log(document.getElementById('posts').value)
+    Element.remove();
+    
     function unfollow() {
         if (confirm("フォローを解除しますか?")) {
             document.follow.submit();
         }
     }
-</script>
-<script>
+
     function unblock() {
         if (confirm("ブロックを解除しますか?")) {
             document.block.submit();

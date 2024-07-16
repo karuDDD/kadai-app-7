@@ -35,7 +35,6 @@ class BlockController extends Controller
         } else {
             // ブロック解除処理
             $loginUser->unblock($id);
-            dd('aaaa');
         }
 
 

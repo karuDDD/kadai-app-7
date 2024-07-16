@@ -47,9 +47,8 @@ class UserController extends Controller
             $isBlocked = $loginUser->isBlocked($user->id);
         }
 
-
         // 画面表示
-        return view('user.index', compact('user', 'posts', 'followCount', 'followerCount', 'isOwnPage', 'isFollowed','isBlocked'));
+        return view('user.index', compact('user', 'posts', 'followCount', 'followerCount', 'isOwnPage', 'isFollowed', 'isBlocked'));
     }
 
     /**
@@ -112,7 +111,7 @@ class UserController extends Controller
     }
 
 
-   
+
 
 
     /**
@@ -139,7 +138,7 @@ class UserController extends Controller
         Validator::make($request->all(), $rules, $messages)->validate();
 
         $user = new User;
-        
+
         $user->name = $request->input('name');
 
         $user->email = $request->input('email');

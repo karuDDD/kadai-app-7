@@ -17,7 +17,7 @@ class User extends Model
     public function posts()
     {
         return Post::where('user', $this->id)
-            ->where('is_deleted',false)
+            ->where('is_deleted', false)
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -35,7 +35,7 @@ class User extends Model
         return $result;
     }
 
-     
+
     /**
      * ユーザーをフォローしているユーザーのリストを取得する
      */
@@ -64,13 +64,13 @@ class User extends Model
         return false;
     }
 
-     /**
+    /**
      * $idのユーザーがこのユーザーをブロックしているか判定する
      */
     public function isBlocked($id)
     {
         foreach ($this->blockUsers() as $blockUser) {
-            if ($blockUser->id == $id) {
+            if ($blockUser->block_user == $id) {
                 return true;
             }
         }
@@ -100,7 +100,7 @@ class User extends Model
             ->delete();
     }
 
-       /**
+    /**
      * $idのユーザーをブロックする
      */
     public function block($id)
@@ -111,7 +111,7 @@ class User extends Model
         $block->save();
     }
 
-        /**
+    /**
      * $idのユーザーをブロック解除する
      */
     public function unblock($id)
@@ -122,12 +122,11 @@ class User extends Model
             ->delete();
     }
 
-      /**
+    /**
      * ユーザーがブロックしている側のユーザーのリストを取得する
      */
     public function blockUsers()
     {
-        return Block::where('block_user',$this->id)->get();
-
+        return Block::where('user', $this->id)->get();
     }
 }
