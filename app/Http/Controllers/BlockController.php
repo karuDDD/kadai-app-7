@@ -18,7 +18,7 @@ class BlockController extends Controller
         // idからユーザーを取得
         $user = User::find($id);
         // ユーザーが存在するか判定
-          if ($user == null) {
+        if ($user == null) {
             return dd('存在しないユーザーです');
         }
 
@@ -27,18 +27,20 @@ class BlockController extends Controller
             return redirect('/user/');
         }
         // ログイン中のユーザーの情報を取得する
-          $loginUser = Session::get('user');
+        $loginUser = Session::get('user');
 
-          if ($request->isBlock) {
+        if ($request->isBlock) {
             // ブロック処理
             $loginUser->block($id);
         } else {
             // ブロック解除処理
             $loginUser->unblock($id);
+            dd('aaaa');
         }
+
+
 
         // 画面表示
         return redirect('/user/' . $user->id);
     }
-
 }
