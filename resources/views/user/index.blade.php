@@ -29,78 +29,93 @@
                                 @csrf @method('PUT') @if ($isFollowed)
                                 <input type="hidden" name="isFollow" value="0" />
                                 <button class="button-white" onClick="unfollow()">
-                                        フォロー済み
-                                    </button> @else
+                                    フォロー済み
+                                </button> @else
                                 <input type="hidden" name="isFollow" value="1" />
                                 <button class="button-black">
-                                        フォロー
-                                    </button> @endif
+                                    フォロー
+                                </button> @endif
                             </form>
                         </div>
                         <div class="block-info">
-                        <form name="block" action="/block/{{ $user->id }}" method="post">
-                                @csrf @method('PUT') 
+                            <form name="block" action="/block/{{ $user->id }}" method="post">
+                                @csrf @method('PUT')
                                 @if ($isBlocked)
-                                <input type="hidden" id="isBlocked" name="isBlock" value="0" />
+                                <input type="hidden" id="block-button" name="isBlock" value="0" />
                                 <button class="button-white" onClick="unblock()">
-                                        ブロック解除
-                                </button>  
+                                    ブロック解除
+                                </button>
                                 @else
-                                <input type="hidden"id="isBlocked" name="isBlock" value="1" />
+                                <input type="hidden" id="block-button" name="isBlock" value="1" />
                                 <button class="button-black">
-                                        ブロック
-                                </button> 
+                                    ブロック
+                                </button>
                                 @endif
                             </form>
-                        @endif
+                            @endif
+                        </div>
+                        <div class="user-name">{{ $user->name }}</div>
                     </div>
-                    <div class="user-name">{{ $user->name }}</div>
+                    <div class="biography">
+                        {{ $user->biography }}
+                    </div>
+                    <div class="follow-info">
+                        <a href="/user/{{ $user->id }}/follow">
+                            <div class="follow">
+                                {{ $followCount }} フォロー中
+                            </div>
+                        </a>
+                        <a href="/user/{{ $user->id }}/follower">
+                            <div class="follower">
+                                {{ $followerCount }} フォロワー
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="biography">
-                    {{ $user->biography }}
-                </div>
-                <div class="follow-info">
-                    <a href="/user/{{ $user->id }}/follow">
-                        <div class="follow">
-                            {{ $followCount }} フォロー中
+                <div class="post-list" id="post-list">
+                    <div class="title">投稿一覧</div>
+                    @foreach ($posts as $post)
+                    <a href="/post/detail/{{ $post->id }}">
+                        <div class="post">
+                            <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
+                            <div class="container">
+                                <div class="user-name">
+                                    {{ $user->name }}
+                                </div>
+                                <div class="content">{{ $post->content }}</div>
+                                <div class="time-stamp">
+                                    {{ $post->created_at }}
+                                </div>
+                            </div>
                         </div>
                     </a>
-                    <a href="/user/{{ $user->id }}/follower">
-                        <div class="follower">
-                            {{ $followerCount }} フォロワー
-                        </div>
-                    </a>
+                    @endforeach
                 </div>
-            </div>
-            <div class="post-list">
-                <div class="title">投稿一覧</div>
-                @foreach ($posts as $post)
-                <input type="hidden" id="posts"  name="post" value="0" />
-                <a href="/post/detail/{{ $post->id }}">
-                    <div class="post">
-                        <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
-                        <div class="container">
-                            <div class="user-name">
-                                {{ $user->name }}
-                            </div>
-                            <div class="content">{{ $post->content }}</div>
-                            <div class="time-stamp">
-                                {{ $post->created_at }}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                @endforeach
+
+                <div id="display-button-container">
+                    <p>ブロックしているユーザーのポストは表示されません</p>
+                    <input type="button" name="ispost" id="display-button" value="表示する" onClick="display()" />
+                </div>
             </div>
         </div>
-    </div>
-    <x-footer></x-footer>
+        <x-footer></x-footer>
 </body>
 <script src="{{ asset('/js/app.js') }}"></script>
 <script>
-    console.log(document.getElementById('posts').value)
-    Element.remove();
+//ブロックしているか判定する
+const blockbutton = document.getElementById('block-button');
+
+
+    const postList = document.getElementById('post-list');
+    postList.style.display = "none";
+
+    if()
+
+
+
     
+
+
     function unfollow() {
         if (confirm("フォローを解除しますか?")) {
             document.follow.submit();
@@ -117,72 +132,72 @@
     .user-page .page-container {
         padding: 0 10px;
     }
-    
+
     .user-page .user-info .user-icon {
         width: 60px;
         height: 60px;
     }
-    
+
     .user-page .user-info {
         margin-bottom: 10px;
     }
-    
+
     .user-page .user-row {
         display: flex;
         justify-content: space-between;
         line-height: 60px;
     }
-    
+
     .user-page .user-info .user-name {
         font-size: 20px;
         font-weight: bold;
     }
-    
+
     .user-page .biography {
         font-size: 14px;
         padding: 8px 0;
     }
-    
+
     .user-page .follow-info {
         display: flex;
         font-size: 14px;
     }
-    
+
     .user-page .follow-info .follow {
         margin-right: 5px;
     }
- 
-    
+
+
     .user-page .title {
         font-size: 18px;
         font-weight: bold;
         color: gray;
         margin-bottom: 6px;
     }
-    
+
     .user-page .post {
         display: flex;
         padding: 0 10px;
     }
-    
+
     .user-page .post .container {
         width: 90%;
     }
-    
+
     .user-page .post-list .user-icon {
         width: 40px;
         height: 40px;
     }
-    
+
     .user-page .user-name {
         line-height: 40px;
     }
-    
+
     .user-page .content {
         font-size: 14px;
         word-wrap: break-word;
     }
-    
+
     .user-page .time-stamp {
         font-size: 8px;
         text-align: end;
