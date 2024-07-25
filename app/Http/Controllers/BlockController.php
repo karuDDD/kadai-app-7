@@ -32,6 +32,10 @@ class BlockController extends Controller
         if ($request->isBlock) {
             // ブロック処理
             $loginUser->block($id);
+            //ブロック時にフォロー解除
+            if ($loginUser->isFollowed($id)) {
+                $loginUser->unfollow($id);
+            }
         } else {
             // ブロック解除処理
             $loginUser->unblock($id);
