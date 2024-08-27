@@ -55,9 +55,9 @@
                             @endif
                         </div>
                         <div class="user-name">{{ $user->name }}</div>
-                    </div>
-                    <div class="biography">
-                        {{ $user->biography }}
+                        <div class="biography">
+                            {{ $user->biography }}
+                        </div>
                     </div>
                     <div class="follow-info">
                         <a href="/user/{{ $user->id }}/follow">
@@ -105,6 +105,8 @@
     //ブロックしているか判定する
     const blockbutton = document.getElementById('block-button');
 
+    console.log(blockbutton.value)
+
     const postList = document.getElementById('post-list');
     postList.style.display = "none";
 
@@ -128,11 +130,6 @@
         document.getElementById("display-button-container").style.display = "none"
     }
 
-    function unfollow() {
-        if (confirm("フォローを解除しますか?")) {
-            document.follow.submit();
-        }
-    }
 
     function unblock() {
         if (confirm("ブロックを解除しますか?")) {
