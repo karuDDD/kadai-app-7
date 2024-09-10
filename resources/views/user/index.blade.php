@@ -108,17 +108,17 @@
     console.log(blockbutton.value)
 
     const postList = document.getElementById('post-list');
-    postList.style.display = "none";
 
-    if (blockbutton) {
+
+    if (blockbutton.value) {
         const isBlocked = blockButton.value == 0
-        if (isBlocked) {
-            document.getElementById("post-list").style.display = "none"
-        }
-        else {
-            document.getElementById("display-button-container").style.display = "none"
-        }
+        document.getElementById("post-list").style.display = "none"
+
+
+        document.getElementById("display-button-container").style.display = "none"
+
     }
+
 
     function unfollow() {
         if (confirm("フォローを解除しますか?")) {
