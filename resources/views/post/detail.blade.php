@@ -38,6 +38,32 @@
             @endif
         </div>
     </div>
+    @foreach ($replys as $reply)
+    <div class="post">
+        <a href="/user/{{ $user->id }}">
+            <div class="user-info">
+                <img class="user-icon" src="{{ asset('/img/user_icon.png') }}" alt="" />
+        </a>
+        <div class="container">
+            <a href="/user/{{ $reply->id }}">
+                <div class="user-name">
+                    {{ $reply->name }}
+                </div>
+            </a>
+            <a href="/post/detail/{{ $reply->id }}">
+                <div class="content">
+                    {{ $reply->content }}
+                </div>
+                <div class="time-stamp">
+                    {{ $reply->created_at }}
+                </div>
+            </a>
+
+        </div>
+        @endforeach
+
+
+
 </body>
 <x-footer></x-footer>
 <script src="{{ asset('/js/app.js') }}"></script>
@@ -53,45 +79,45 @@
         width: 50px;
         height: 50px;
     }
-    
+
     .post-detail-page .user-info {
         display: flex;
     }
-    
+
     .post-detail-page .user-name {
         line-height: 50px;
         font-size: 18px;
     }
-    
+
     .post-detail-page .time-stamp {
         text-align: end;
         font-size: 14px;
     }
-    
+
     .post-detail-page .post {
         padding: 0 10px;
     }
-    
+
     .post-detail-page .menu {
         display: flex;
         justify-content: end;
     }
-    
+
     .post-detail-page .menu-item {
         font-size: 16px;
         margin: 0 2px;
     }
-    
+
     .post-detail-page .menu-item {
         font-size: 16px;
         margin: 0 2px;
     }
-    
+
     .post-detail-page .menu-item {
         font-size: 16px;
         margin: 0 2px;
     }
-    
+
     .post-detail-page .content {
         word-wrap: break-word;
     }

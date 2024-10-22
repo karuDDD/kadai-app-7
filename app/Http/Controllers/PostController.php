@@ -40,11 +40,11 @@ class PostController extends Controller
         // ログイン中のユーザーの情報を取得する
         $loginUser = Session::get('user');
 
-        $rules =[
-            'postContent' =>'required|max:140'
+        $rules = [
+            'postContent' => 'required|max:140'
         ];
 
-        $massages = ['required' => '投稿内容が未入力です。','max' =>'入力可能文字数は140以内です。'];
+        $massages = ['required' => '投稿内容が未入力です。', 'max' => '入力可能文字数は140以内です。'];
 
         Validator::make($request->all(), $rules, $massages)->validate();
 
@@ -65,6 +65,8 @@ class PostController extends Controller
         // 指定したIDの投稿情報を取得する
         $post = Post::find($id);
 
+        $reply = $post->replys();
+
         // 投稿が存在するか判定
         if ($post == null) {
             return dd('存在しない投稿です');
@@ -84,7 +86,7 @@ class PostController extends Controller
         }
 
         // 画面表示
-        return view('post.detail', compact('post', 'user', 'isOwnPost'));
+        return view('post.detail', compact('post', 'user', 'isOwnPost', 'replys'));
     }
 
     /**

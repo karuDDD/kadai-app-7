@@ -17,4 +17,11 @@ class Post extends Model
     {
         return User::find($this->user);
     }
+
+    public function replys()
+    {
+        return post::where('reply_to', $this->id)
+            ->where('is_deleted', false)
+            ->get();
+    }
 }
