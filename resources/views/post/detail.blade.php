@@ -60,6 +60,12 @@
             </a>
 
         </div>
+        <form action="{{ route('posts.reply', $post->id) }}" method="POST">
+            @csrf
+            <textarea name="content" required placeholder="返信を入力してください..."></textarea>
+            <button type="submit">返信する</button>
+        </form>
+
         @endforeach
 
 

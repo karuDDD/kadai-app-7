@@ -174,4 +174,26 @@ class PostController extends Controller
 
         return redirect('/');
     }
+
+
+    // 既存のメソッド...
+
+    public function reply(Request $request, $postId)
+    {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|string|max:500',
+        ]);
+
+        // 返信の作成
+        $reply = new Reply();
+        $reply->post_id = $postId;
+        $reply->content = $request->input('content');
+        $reply->user_id = auth()->id(); // 認証ユーザーのIDを設定
+        $reply->save();
+
+        // 返信完了後のリダイレクトまたはレスポンス
+        return redirect()->route('posts.show', $postId)
+            ->with('success', '返信が追加されました');
+    }
 }
